@@ -1,6 +1,4 @@
 from pico2d import *
-import sys
-import random
 import time
 
 from grass import Grass
@@ -31,10 +29,14 @@ def handle_events():
                 last_input_time = time.monotonic()
                 if event.key == SDLK_SPACE and boy.state == 'SLEEP':
                     boy.wake()
+                elif event.key == SDLK_a and boy.state == 'IDLE':
+                    boy.start_auto_run()
         elif event.type == SDL_KEYUP and event.key in (SDLK_LEFT, SDLK_RIGHT):
             last_input_time = time.monotonic()
             if event.key in pressed_directions:
                 pressed_directions.remove(event.key)
+            if boy.state == 'AUTORUN':
+                continue
             if pressed_directions:
                 direction = -1 if pressed_directions[-1] == SDLK_LEFT else 1
                 boy.start_running(direction)
@@ -61,12 +63,15 @@ def reset_world():
 
 
 def update_world():
+    global last_input_time
+    previous_state = boy.state
     if boy.state == 'IDLE' and time.monotonic() - last_input_time >= 5:
         boy.sleep()
 
     for o in world:
         o.update()
-    pass
+    if previous_state == 'AUTORUN' and boy.state == 'IDLE':
+        last_input_time = time.monotonic()
 
 
 def render_world():
@@ -76,15 +81,20 @@ def render_world():
     update_canvas()
 
 
-running = True
+def main():
+    global running
+    running = True
+    open_canvas()
+    try:
+        reset_world()
+        while running:
+            handle_events()
+            update_world()
+            render_world()
+            delay(0.01)
+    finally:
+        close_canvas()
 
-open_canvas()
-reset_world()
-# game loop
-while running:
-    handle_events()
-    update_world()
-    render_world()
-    delay(0.01)
-# finalization code
-close_canvas()
+
+if __name__ == '__main__':
+    main()
