@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> IDLE
+    IDLE --> RUN: 좌우 방향키 누름
+    RUN --> IDLE: 방향키 모두 해제
+    IDLE --> SLEEP: 유휴 5초
+    SLEEP --> IDLE: Space 누름
+    SLEEP --> RUN: 좌우 방향키 누름
+    IDLE --> AUTORUN: a 누름
+    AUTORUN --> IDLE: 진입 후 5초 경과
+    AUTORUN --> RUN: 좌우 방향키 누름
+    AUTORUN --> AUTORUN: 경계 도달 / 방향 반전

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="title desc">
+  <title id="title">소년 상태 전이 다이어그램</title>
+  <desc id="desc">IDLE, RUN, SLEEP, AUTORUN 사이의 전이. AutoRun 경계 반사는 진입 시각을 초기화하지 않는다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#42526b"/></marker>
+    <style>
+      text { font-family: 'Malgun Gothic', sans-serif; fill: #1c2c43; text-anchor: middle; }
+      .edge { fill: none; stroke: #42526b; stroke-width: 2; marker-end: url(#arrow); }
+      .label { font-size: 15px; paint-order: stroke; stroke: #f8fafc; stroke-width: 6px; stroke-linejoin: round; }
+      .node { fill: white; stroke: #42526b; stroke-width: 2; }
+      .name { font-size: 22px; font-weight: bold; }
+    </style>
+  </defs>
+  <rect width="1000" height="700" fill="#f8fafc"/>
+  <text x="500" y="42" font-size="26" font-weight="bold">소년 상태 전이</text>
+  <circle cx="265" cy="190" r="9" fill="#1c2c43"/>
+  <path class="edge" d="M275 190H350"/>
+  <rect class="node" x="350" y="150" width="180" height="80" rx="14"/>
+  <text class="name" x="440" y="198">IDLE</text>
+  <rect class="node" x="730" y="150" width="180" height="80" rx="14"/>
+  <text class="name" x="820" y="198">RUN</text>
+  <rect class="node" x="80" y="425" width="180" height="80" rx="14"/>
+  <text class="name" x="170" y="473">SLEEP</text>
+  <rect x="615" y="425" width="220" height="80" rx="14" fill="#dcefff" stroke="#22659a" stroke-width="2"/>
+  <text class="name" x="725" y="473">AUTORUN</text>
+  <path class="edge" d="M530 170H730"/>
+  <text class="label" x="630" y="155">좌우 방향키 누름</text>
+  <path class="edge" d="M730 215H530"/>
+  <text class="label" x="630" y="244">방향키 모두 해제</text>
+  <path class="edge" d="M350 210Q170 230 170 425"/>
+  <text class="label" x="212" y="293">유휴 5초</text>
+  <path class="edge" d="M260 440Q395 390 410 230"/>
+  <text class="label" x="338" y="361">Space 누름</text>
+  <path class="edge" d="M80 465H40V90H820V150"/>
+  <text class="label" x="440" y="84">좌우 방향키 누름</text>
+  <path class="edge" d="M490 230L660 425"/>
+  <text class="label" x="537" y="309">a 누름</text>
+  <path class="edge" d="M615 465Q440 465 440 230"/>
+  <text class="label" x="460" y="414">진입 후 5초 경과</text>
+  <path class="edge" d="M810 425L850 230"/>
+  <text class="label" x="848" y="333">좌우 방향키 누름</text>
+  <path class="edge" d="M835 460C960 440 960 570 790 505"/>
+  <text class="label" x="840" y="582">경계 도달 / 방향 반전</text>
+  <text x="500" y="650" font-size="16">경계 반사는 AUTORUN 유지 · 타이머 초기화 없음</text>
+  <text x="500" y="677" font-size="14">시간 만료와 방향키 취소 시 기본 크기 및 속도 복원</text>
+</svg>
